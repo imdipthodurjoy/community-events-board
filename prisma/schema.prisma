@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 Int                     @id @default(autoincrement())
+  name               String?
+  email              String                  @unique
+  password           String
+  role               String                  @default("USER")
+  favouriteCategories UserFavouriteCategory[]
+  reminders          EventReminder[]
+  cardDesigns        EventCardDesign[]
+  createdAt          DateTime                @default(now())
+  updatedAt          DateTime                @updatedAt
+
+  @@map("users")
+}
+
+model Event {
+  id          Int               @id @default(autoincrement())
+  title       String
+  category    String
+  city        String
+  date        DateTime
+  price       Decimal           @default(0) @db.Decimal(12, 2)
+  description String            @db.Text
+  imageUrl    String?           @db.VarChar(2048)
+  isActive    Boolean           @default(true)
+  reminders   EventReminder[]
+  cardDesigns EventCardDesign[]
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([isActive, date])
+  @@index([category, isActive, date])
+  @@index([city, isActive, date])
+  @@map("events")
+}
+
+model UserFavouriteCategory {
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  category String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, category])
+  @@map("user_favourite_categories")
+}
+
+model EventReminder {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, eventId])
+  @@index([eventId])
+  @@map("event_reminders")
+}
+
+model EventCardDesign {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  eventId   Int
+  theme     String   @default("default")
+  stickers  Json
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, eventId])
+  @@map("event_card_designs")
+}
