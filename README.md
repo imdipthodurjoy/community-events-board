@@ -1,36 +1,164 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🎉 Community Events Board
 
-## Getting Started
+A full-stack community events platform built with Next.js, JavaScript, Prisma, and MySQL. Users can discover upcoming events, filter by category and city, save favourites, manage reminders, and personalize event cards.
 
-First, run the development server:
+## ✨ Features
+
+### 🌍 Public Event Discovery
+- Browse active upcoming community events.
+- Search events by keyword.
+- Filter events by category and city.
+- Combine multiple filters.
+- Browse events with pagination.
+- View event details, dates, locations, prices, and images.
+
+### 👤 User Accounts
+- User registration and login.
+- Authenticated user sessions.
+- Personalized event favourites.
+- My Feed based on preferred event categories.
+- Save and remove event reminders.
+- Personalized event card designs.
+
+### 🎨 Event Card Designer
+- Choose from three themes.
+- Select stickers for event cards.
+- Limit sticker selection to three per card.
+- Save custom designs to the database.
+
+### 🛠️ Admin Dashboard
+- Admin authentication.
+- Create and edit events.
+- Manage event information.
+- Set events as Active or Inactive.
+- Protected admin routes and API endpoints.
+
+## 🧰 Technology Stack
+
+- **Frontend:** Next.js App Router, React, JavaScript, Tailwind CSS
+- **Backend:** Next.js Route Handlers
+- **Database:** MySQL
+- **ORM:** Prisma
+- **Authentication:** JWT and password hashing
+- **Development Environment:** Node.js, npm, XAMPP
+
+## ⚙️ Prerequisites
+
+Install the following before running the project:
+
+- Node.js
+- npm
+- MySQL or XAMPP
+- Git
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/imdipthodurjoy/community-events-board.git
+cd community-events-board
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Create the database
+
+Start MySQL through XAMPP or your preferred MySQL service.
+
+Create a database named:
+
+```sql
+CREATE DATABASE community_events_board;
+```
+
+### 4. Configure environment variables
+
+Create a `.env` file in the project root:
+
+```env
+DATABASE_URL="mysql://root:@localhost:3306/community_events_board"
+ADMIN_EMAIL="your-admin-email@example.com"
+ADMIN_PASSWORD="replace-with-a-strong-password"
+JWT_SECRET="replace-with-a-long-random-secret"
+```
+
+Update these values to match your local MySQL configuration. Use strong, unique credentials.
+
+**Security:** Never commit `.env` or expose database credentials, passwords, or JWT secrets publicly.
+
+### 5. Apply database migrations
+
+```bash
+npx prisma migrate deploy
+```
+
+Generate the Prisma Client if needed:
+
+```bash
+npx prisma generate
+```
+
+### 6. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🏗️ Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To verify the production build:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+To start the production server after building:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🗄️ Database
 
-## Deploy on Vercel
+The application uses MySQL with Prisma.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Database migrations are stored in:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+prisma/migrations/
+```
+
+The Prisma schema is located at:
+
+```text
+prisma/schema.prisma
+```
+
+## 🔐 Security Notes
+
+- Keep environment variables private.
+- Use strong admin credentials and a secure JWT secret.
+- Do not expose secrets in source code, screenshots, or demo videos.
+- Test protected routes before deployment.
+- Configure production environment variables securely.
+
+## 📌 Project Status
+
+The main application features have been implemented. Final verification and assignment submission preparation are in progress.
+
+## 👨‍💻 Developer
+
+**Diptho Durjoy**
+
+GitHub: [@imdipthodurjoy](https://github.com/imdipthodurjoy)
+
+## 📄 License
+
+No license has been specified yet.
